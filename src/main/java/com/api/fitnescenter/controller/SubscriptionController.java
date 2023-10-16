@@ -6,6 +6,7 @@ import com.api.fitnescenter.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class SubscriptionController {
     @Autowired
     private SubscriptionService subscriptionService;
     @PostMapping("/subscribe")
+    @PreAuthorize("hasRole('CANDIDATE')")
     public ResponseEntity<Subscription> saveSubscription(@RequestBody SubscriptionRequest subscriptionRequest) {
         Subscription subscription = subscriptionService.saveSubscription(subscriptionRequest);
         if (subscription != null) {

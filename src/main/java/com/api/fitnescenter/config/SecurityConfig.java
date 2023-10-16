@@ -22,7 +22,13 @@ import java.util.Collections;
 public class SecurityConfig {
 
     private static final String[] strings = {
-            "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/api/auth/**", "/api/registration/**", "/api/fitness-services/**", "/api/subscriptions/**",
+            "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/api/auth/**", "/api/registration/**", "/api/fitness-services/**",
+//            "/api/subscriptions/**",
+//            "/api/payment/**"
+
+    };
+    private static final String[] stringCandidate = {
+        "/api/subscriptions/**",
             "/api/payment/**"
 
     };
@@ -30,6 +36,8 @@ public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
 
     public static final String[] Endpoint = strings;
+    public static final String[] EndpointCandidate = stringCandidate;
+//    public static final String[] Endpoint = strings;
 
 
 
@@ -46,7 +54,7 @@ public class SecurityConfig {
                 .authorizeRequests(authorizeRequests ->
                                 authorizeRequests
                                         .requestMatchers(Endpoint).permitAll()
-//                                        .requestMatchers(EndpointCandidate).access("hasRole('CANDIDATE')")
+                                        .requestMatchers(EndpointCandidate).access("hasRole('CANDIDATE')")
 //                                .requestMatchers(EndpointAdmin).access("hasRole('ADMIN')")
                 );
 
